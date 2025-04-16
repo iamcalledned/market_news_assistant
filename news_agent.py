@@ -1,4 +1,4 @@
-from search_serp import search_headlines
+from search_google import search_headlines
 from summarize import summarize_headlines
 
 def analyze_sentiment(query):
