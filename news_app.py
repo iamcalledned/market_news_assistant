@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 from news_agent import analyze_sentiment
 import os
+from rss_fetcher import fetch_rss_articles
 
 app = Flask(__name__)
 
@@ -19,6 +20,17 @@ def internal_analyze():
     try:
         result = analyze_sentiment(query)
         return jsonify({"result": result})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+@app.route("/internal/fetch_rss_news", methods=["POST"])
+def trigger_rss_fetch():
+    try:
+        articles = fetch_rss_articles()
+        return jsonify({
+            "status": "RSS fetch complete",
+            "articles_fetched": len(articles)
+        })
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
