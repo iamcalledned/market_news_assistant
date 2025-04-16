@@ -1,8 +1,35 @@
 import feedparser
 from datetime import datetime
+from bs4 import BeautifulSoup
 from newspaper import Article
+from playwright.sync_api import sync_playwright
+import time
 from database import insert_articles
 from rss_config import RSS_FEEDS
+
+def fetch_full_text_with_playwright(url):
+    try:
+        with sync_playwright() as p:
+            browser = p.chromium.launch(headless=True)
+            context = browser.new_context(
+                user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
+                viewport={"width": 1280, "height": 800},
+                java_script_enabled=True,
+            )
+            page = context.new_page()
+            page.goto(url, timeout=60000)
+            page.wait_for_load_state("networkidle")
+            time.sleep(4)
+            html = page.content()
+            browser.close()
+
+            soup = BeautifulSoup(html, "html.parser")
+            article = soup.find("article") or soup.find("main") or soup.body
+            text = article.get_text(separator="\n", strip=True) if article else soup.get_text()
+            return text, "Untitled"
+    except Exception as e:
+        print(f"[Playwright] Failed on {url}: {e}")
+        return "", "Untitled"
 
 def fetch_full_text(url):
     try:
@@ -11,8 +38,8 @@ def fetch_full_text(url):
         article.parse()
         return article.text, article.title
     except Exception as e:
-        print(f"[RSS] Failed to fetch full text from {url}: {e}")
-        return "", "Untitled"
+        print(f"[RSS] Newspaper failed, falling back to Playwright for {url}: {e}")
+        return fetch_full_text_with_playwright(url)
 
 def fetch_rss_articles():
     all_articles = []
