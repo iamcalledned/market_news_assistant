@@ -1,0 +1,51 @@
+[
+    {
+      "name": "_pvi",
+      "value": "eyJpZCI6InYtbTlsYnQwaDR4dHI3bHg4NCIsImRvbWFpbiI6Ii53c2ouY29tIiwidGltZSI6MTc0NDg5MjI3MDMzNn0%3D",
+      "domain": ".wsj.com",
+      "path": "/",
+      "httpOnly": false,
+      "secure": true
+    },
+    {
+      "name": "_tbc",
+      "value": "%7Bkpcd%7DChBtOWxidDA4OWhidjJ1Y3Q1EgpLS2JncXBCbHB1Gjw1dFc5eVR2ZXVDTEdzVGFyMXI3STAyNUdSYTc2ZmhEclgwMnExYkdCMnpseWgwblMyUTlVMkhaRWxlWUogAA",
+      "domain": ".wsj.com",
+      "path": "/",
+      "httpOnly": false,
+      "secure": true
+    },
+    {
+      "name": "_pcid",
+      "value": "%7B%22browserId%22%3A%22m9lbt089hbv2uct5%22%7D",
+      "domain": ".wsj.com",
+      "path": "/",
+      "httpOnly": false,
+      "secure": true
+    },
+    {
+      "name": "datadome",
+      "value": "lyY6jHDTLh8NrJILZXkxHA4wl_SpHg6mfFqSRakaDu6WXxP2vJfIdietOjSOTpIUfxMs1gmqwqz8vru0AzRQM8EcU3kuC9f3RvWBDHUoB6AmXdBc_oDbnT8H2i~hGiFT",
+      "domain": ".wsj.com",
+      "path": "/",
+      "httpOnly": false,
+      "secure": true
+    },
+    {
+      "name": "ab_uuid",
+      "value": "cc8f3c59-7318-4caf-b96e-3f29d0e30c4b",
+      "domain": ".wsj.com",
+      "path": "/",
+      "httpOnly": false,
+      "secure": true
+    },
+    {
+      "name": "usr_prof_v2",
+      "value": "eyJpYyI6MX0%3D",
+      "domain": ".wsj.com",
+      "path": "/",
+      "httpOnly": false,
+      "secure": true
+    }
+  ]
+  
