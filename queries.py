@@ -22,6 +22,19 @@ def get_source():
 #!/usr/bin/env python3
 import sqlite3
 
+def add_tags_column():
+    conn = sqlite3.connect(DB_PATH)
+    c = conn.cursor()
+    try:
+        c.execute("ALTER TABLE articles ADD COLUMN tags TEXT")
+        print("[DB] 'tags' column added to articles table.")
+    except sqlite3.OperationalError as e:
+        if "duplicate column name" in str(e):
+            print("[DB] 'tags' column already exists.")
+        else:
+            raise
+    conn.commit()
+    conn.close()
 
 def get_counts():
     conn = sqlite3.connect(DB_PATH)
@@ -49,5 +62,5 @@ def get_counts():
     conn.close()
 
 if __name__ == "__main__":
-    main()
+    add_tags_column()
 
