@@ -16,12 +16,15 @@ if (!url) {
 
     try {
         console.log(`[WSJ Stealth] Navigating to: ${url}`);
+
+        // Inject cookies if available
         const cookiesPath = "cookies/wsj_cookies.json";
-    if (fs.existsSync(cookiesPath)) {
-        const cookies = JSON.parse(fs.readFileSync(cookiesPath));
-        await page.setCookie(...cookies);
-        console.log("[WSJ] Injected saved cookies");
-    } else {
+        if (fs.existsSync(cookiesPath)) {
+            const cookies = JSON.parse(fs.readFileSync(cookiesPath));
+            await page.setCookie(...cookies);
+            console.log("[WSJ] Injected saved cookies");
+        }
+
         await page.goto(url, { waitUntil: 'networkidle2', timeout: 60000 });
 
         const html = await page.content();
