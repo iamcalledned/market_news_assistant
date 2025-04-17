@@ -15,20 +15,36 @@ if (!url) {
     const page = await browser.newPage();
 
     try {
+        console.log(`[WSJ Stealth] Navigating to: ${url}`);
         await page.goto(url, { waitUntil: 'networkidle2', timeout: 60000 });
 
-        // Optionally screenshot/debug
-        // await page.screenshot({ path: 'page.png' });
-
-        const text = await page.evaluate(() => {
-            const container = document.querySelector('article') || document.querySelector('main') || document.body;
-            return container.innerText;
+        const html = await page.content();
+        const result = await page.evaluate(() => {
+            const selectors = [
+                'article',
+                'main',
+                'div[class*="content"]',
+                'body'
+            ];
+            for (let sel of selectors) {
+                const el = document.querySelector(sel);
+                if (el && el.innerText.length > 100) {
+                    return el.innerText;
+                }
+            }
+            return null;
         });
 
-        console.log(text.slice(0, 1500));  // Preview for now
-    } catch (err) {
-        console.error("❌ Error:", err.message);
-    }
+        if (result) {
+            console.log("🧾 Preview:\n");
+            console.log(result.slice(0, 1500));
+        } else {
+            console.error("❌ Could not extract any content from page.");
+        }
 
-    await browser.close();
+    } catch (err) {
+        console.error("💥 Error:", err.message);
+    } finally {
+        await browser.close();
+    }
 })();
