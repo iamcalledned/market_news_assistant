@@ -1,0 +1,43 @@
+[
+    {
+      "name": "_pcid",
+      "value": "%7B%22browserId%22%3A%22m9lcv9l5papmr1v2%22%7D",
+      "domain": ".marketwatch.com",
+      "path": "/",
+      "httpOnly": false,
+      "secure": true
+    },
+    {
+      "name": "_pctx",
+      "value": "%7Bu%7DN4IgrgzgpgThIC4B2YA2qA05owMoBcBDfSREQpAeyRCwgEt8oBJAEzIE4AmHgZi4CsvAIwB2DqIAMADkHTRvEAF8gA",
+      "domain": ".marketwatch.com",
+      "path": "/",
+      "httpOnly": false,
+      "secure": true
+    },
+    {
+      "name": "ab_uuid",
+      "value": "5be9116f-8948-4898-9729-4032c31702d5",
+      "domain": ".marketwatch.com",
+      "path": "/",
+      "httpOnly": false,
+      "secure": true
+    },
+    {
+      "name": "datadome",
+      "value": "6XHfrmlh1PIcKeNfct0kiT2v3uLL_23tdFdjQUaHBHRl3SvNiiVBtgMVrYF2G0OaFjxmQQSiyIYEmnJuqc5lsgzkk9Gz2~o7yuGgHtQu~VHlHrqBxSA1O9GBXzrAkQon",
+      "domain": ".marketwatch.com",
+      "path": "/",
+      "httpOnly": false,
+      "secure": true
+    },
+    {
+      "name": "usr_prof_v2",
+      "value": "eyJpYyI6MX0%3D",
+      "domain": ".marketwatch.com",
+      "path": "/",
+      "httpOnly": false,
+      "secure": true
+    }
+  ]
+  
