@@ -95,5 +95,5 @@ def get_tag_counts():
 
 
 if __name__ == "__main__":
-    get_source()
+    get_tag_counts()
 
