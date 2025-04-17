@@ -61,6 +61,39 @@ def get_counts():
 
     conn.close()
 
+def get_tag_counts():
+    import sqlite3
+    from config import DB_PATH  # or set DB_PATH manually
+
+    conn = sqlite3.connect(DB_PATH)
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        SELECT bot_response
+        FROM articles
+        WHERE bot_response IS NOT NULL AND bot_response != ''
+    """)
+
+    from collections import Counter
+    import re
+    tag_counter = Counter()
+
+    for (response,) in cursor.fetchall():
+        # Try to extract list of tags from bot_response
+        try:
+            tags = re.findall(r'"([^"]+)"', response)
+            for tag in tags:
+                tag_counter[tag.strip()] += 1
+        except Exception as e:
+            print(f"[WARN] Could not parse tags from response: {e}")
+
+    print("🧠 Tag Counts:")
+    for tag, count in tag_counter.most_common():
+        print(f"{tag}: {count}")
+
+    conn.close()
+
+
 if __name__ == "__main__":
     get_source()
 
