@@ -28,7 +28,8 @@ stop_words = set(stopwords.words('english'))
 def clean_text(text):
     text = re.sub(r"http\S+", "", text)
     text = re.sub(r"[^\w\s]", "", text)
-    tokens = nltk.word_tokenize(text.lower())
+    tokens = text.lower().split()
+
     return " ".join([word for word in tokens if word not in stop_words])
 
 def tag_article(text):
