@@ -40,6 +40,11 @@ def tag_article(text):
     return ",".join(sorted(tags))
 
 def add_tags_column():
+    import os
+    print("[DEBUG] Attempting to connect to DB_PATH:", DB_PATH)
+    print("[DEBUG] Current working directory:", os.getcwd())
+    print("[DEBUG] File exists?", os.path.exists(DB_PATH))
+
     conn = sqlite3.connect(DB_PATH)
     c = conn.cursor()
     try:
