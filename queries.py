@@ -63,8 +63,10 @@ def get_counts():
 
 def get_tag_counts():
     import sqlite3
-    from config import DB_PATH  # or set DB_PATH manually
+    from collections import Counter
+    import re
 
+    DB_PATH = "/home/ned/iamcalledned/data/sniffer.db"
     conn = sqlite3.connect(DB_PATH)
     cursor = conn.cursor()
 
@@ -74,12 +76,9 @@ def get_tag_counts():
         WHERE bot_response IS NOT NULL AND bot_response != ''
     """)
 
-    from collections import Counter
-    import re
     tag_counter = Counter()
 
     for (response,) in cursor.fetchall():
-        # Try to extract list of tags from bot_response
         try:
             tags = re.findall(r'"([^"]+)"', response)
             for tag in tags:
