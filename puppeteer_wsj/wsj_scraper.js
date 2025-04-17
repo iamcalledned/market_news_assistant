@@ -15,16 +15,20 @@ if (!url) {
     const page = await browser.newPage();
 
     try {
-        console.log(`[WSJ Stealth] Navigating to: ${url}`);
-
-        // Inject cookies if available
         const cookiesPath = "cookies/wsj_cookies.json";
         if (fs.existsSync(cookiesPath)) {
-            const cookies = JSON.parse(fs.readFileSync(cookiesPath));
-            await page.setCookie(...cookies);
-            console.log("[WSJ] Injected saved cookies");
+            console.log(`[WSJ] Found cookie file at ${cookiesPath}`);
+            try {
+                const cookies = JSON.parse(fs.readFileSync(cookiesPath));
+                await page.setCookie(...cookies);
+                console.log("[WSJ] Injected saved cookies");
+            } catch (cookieErr) {
+                console.error("[WSJ] Failed to load cookies:", cookieErr.message);
+            }
+        } else {
+            console.warn(`[WSJ] Cookie file not found at: ${cookiesPath}`);
         }
-
+        
         await page.goto(url, { waitUntil: 'networkidle2', timeout: 60000 });
 
         const html = await page.content();
