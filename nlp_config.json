@@ -1,5 +1,5 @@
 {
-  "db_path": "/full/path/to/your/sniffer_news.db",
+  "db_path": "/home/ned/projects/market_maker_dashboard/news_sniffer/sniffer.sqlite",
   "tag_keywords": {
     "inflation": ["cpi", "inflation", "consumer price", "ppi", "cost of living"],
     "interest rates": ["fed", "fomc", "rate hike", "interest rates", "bond yield"],
