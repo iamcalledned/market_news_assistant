@@ -92,6 +92,45 @@ def get_tag_counts():
 
     conn.close()
 
+def inspect_text_quality(limit=20):
+    import sqlite3
+    DB_PATH = "/home/ned/iamcalledned/data/sniffer.db"
+    conn = sqlite3.connect(DB_PATH)
+    c = conn.cursor()
+
+    c.execute("""
+        SELECT source, headline, LENGTH(full_text), full_text
+        FROM articles
+        ORDER BY timestamp DESC
+        LIMIT ?
+    """, (limit,))
+
+    rows = c.fetchall()
+    for source, headline, length, text in rows:
+        print(f"\n🔹 Source: {source}\n📰 Headline: {headline}\n📏 Length: {length}")
+        print("🧪 Snippet Preview:\n", text[:300].replace("\n", " ") + "...")
+    
+    conn.close()
+
+def find_empty_articles():
+    import sqlite3
+    DB_PATH = "/home/ned/iamcalledned/data/sniffer.db"
+    conn = sqlite3.connect(DB_PATH)
+    c = conn.cursor()
+
+    c.execute("""
+        SELECT source, headline, url
+        FROM articles
+        WHERE LENGTH(full_text) < 100
+        ORDER BY timestamp DESC
+        LIMIT 20
+    """)
+
+    for row in c.fetchall():
+        print(f"🚨 {row[0]} - {row[1]}\n🔗 {row[2]}\n")
+
+    conn.close()
+
 
 if __name__ == "__main__":
     get_tag_counts()
