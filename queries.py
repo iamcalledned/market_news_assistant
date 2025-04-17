@@ -62,5 +62,5 @@ def get_counts():
     conn.close()
 
 if __name__ == "__main__":
-    add_tags_column()
+    get_source()
 
