@@ -19,14 +19,31 @@ def fetch_full_text_with_playwright(url):
             page = context.new_page()
             page.goto(url, timeout=60000)
             page.wait_for_load_state("networkidle")
-            time.sleep(4)
+            time.sleep(6)
             html = page.content()
             browser.close()
 
             soup = BeautifulSoup(html, "html.parser")
-            article = soup.find("article") or soup.find("main") or soup.body
-            text = article.get_text(separator="\n", strip=True) if article else soup.get_text()
+
+            # Try multiple selectors for stubborn sites like MarketWatch
+            selectors = [
+                "div.article__content",
+                "div.region--article-body",
+                "main",
+                "article",
+                "body"
+            ]
+
+            for selector in selectors:
+                container = soup.select_one(selector)
+                if container:
+                    text = container.get_text(separator="\n", strip=True)
+                    break
+            else:
+                text = soup.get_text(separator="\n", strip=True)
+
             return text, "Untitled"
+
     except Exception as e:
         print(f"[Playwright] Failed on {url}: {e}")
         return "", "Untitled"
