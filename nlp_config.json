@@ -1,0 +1,12 @@
+{
+  "db_path": "/full/path/to/your/sniffer_news.db",
+  "tag_keywords": {
+    "inflation": ["cpi", "inflation", "consumer price", "ppi", "cost of living"],
+    "interest rates": ["fed", "fomc", "rate hike", "interest rates", "bond yield"],
+    "commodities": ["gold", "oil", "crude", "wti", "brent"],
+    "crypto": ["bitcoin", "crypto", "ethereum", "blockchain"],
+    "geopolitics": ["china", "taiwan", "russia", "ukraine", "conflict"],
+    "earnings": ["earnings", "eps", "quarterly results", "beat estimates"],
+    "tech": ["ai", "semiconductor", "nvidia", "openai", "apple", "microsoft"]
+  }
+}
